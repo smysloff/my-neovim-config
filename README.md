@@ -1,0 +1,3 @@
+# My NeoVim Config
+
+Prerequisite: install [ripgrep](https://github.com/BurntSushi/ripgrep).
