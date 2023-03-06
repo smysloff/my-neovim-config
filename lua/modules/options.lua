@@ -1,40 +1,48 @@
-vim.opt.shiftwidth = 4
-vim.opt.tabstop = 4
-vim.opt.softtabstop = 4
-vim.opt.expandtab = true
+vim.g.netrw_banner = 0
 
-vim.opt.smartindent = true
+local options = {
 
-vim.opt.wrap = false
+  tabstop = 4,
+  shiftwidth = 4,
+  softtabstop = 4,
+  expandtab = true,
+  smartindent = true,
 
-vim.opt.swapfile = false
-vim.opt.backup = false
-vim.opt.undodir = os.getenv("HOME") .. '/.vim/undodir'
-vim.opt.undofile = true
+  wrap = false,
+  fixeol = false,
 
-vim.opt.ignorecase = true
-vim.opt.hlsearch = false
-vim.opt.incsearch = true
+  backup = false,
+  swapfile = false,
+  undodir = os.getenv('HOME') .. '/.vim/undodir',
+  undofile = true,
 
-vim.opt.termguicolors = true
+  hlsearch = false,
+  incsearch = true,
+  ignorecase = true,
 
-vim.opt.splitbelow = true
-vim.opt.splitright = true
+  termguicolors = true,
 
-vim.opt.fixeol = false
+  splitbelow = true,
+  splitright = true,
 
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.numberwidth = 4
+  number = true,
+  relativenumber = true,
+  numberwidth = 4,
 
-vim.opt.scrolloff = 8
-vim.opt.sidescrolloff = 8
-vim.opt.signcolumn = 'yes'
+  scrolloff = 8,
+  sidescrolloff = 8,
+  signcolumn = 'yes',
+
+  colorcolumn = '80'
+}
+
+for k, v in pairs(options) do
+  vim.opt[k] = v
+end
+
 vim.opt.isfname:append('@-@')
 
-vim.opt.colorcolumn = '80'
-
-local fileTypIndentGroup = vim.api.nvim_create_augroup('FileTypeIndent', {
+local fileTypeIndentGroup = vim.api.nvim_create_augroup('FileTypeIndent', {
   clear = true,
 })
 
@@ -42,8 +50,9 @@ vim.api.nvim_create_autocmd('FileType', {
   pattern = { 'lua', 'javascript', 'html', },
   callback = function()
     vim.schedule(function()
-      vim.opt.softtabstop = 2
+      vim.opt.tabstop = 2
       vim.opt.shiftwidth = 2
+      vim.opt.softtabstop = 2
     end)
   end,
   group = fileTypeIndentGroup,
